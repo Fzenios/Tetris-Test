@@ -7,7 +7,7 @@ public class TetrisBlockScr : MonoBehaviour
     float CurrentTime;
     [SerializeField] float FallTimeSlow, FallTimeFast;
     float FallTime;
-    public static int Height = 20;
+    public static int Height = 21;
     public static int Width = 10;
     [SerializeField] Vector3 RotationPoint;
     static Transform[,] grid = new Transform[Width,Height];
@@ -15,6 +15,7 @@ public class TetrisBlockScr : MonoBehaviour
     {
         CurrentTime = 0;
         FallTime = FallTimeSlow;
+        GameOverCheck();
     }
 
     void Update()
@@ -126,10 +127,30 @@ public class TetrisBlockScr : MonoBehaviour
                 return false;
             }
             
+            
             if(grid[RoundedX, RoundedY] != null)
                 return false;
         }
 
         return true;
+    }
+    void GameOverCheck()
+    {
+        /*foreach (Transform children in transform)
+        {
+            int RoundedY = Mathf.RoundToInt(children.transform.position.y);  
+            if(RoundedY >= Height)
+            {
+                FindObjectOfType<GameoverScr>().Gameover();
+            }
+        }*/
+        foreach (Transform children in transform)
+        {
+            int RoundedX = Mathf.RoundToInt(children.transform.position.x);
+            int RoundedY = Mathf.RoundToInt(children.transform.position.y);   
+
+            if(grid[RoundedX, RoundedY] != null)
+                FindObjectOfType<GameoverScr>().Gameover();    
+        }
     }
 }

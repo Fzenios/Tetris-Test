@@ -17,7 +17,7 @@ public class SpownerScr : MonoBehaviour
     }
     public void SpownBlock()
     {
-        int RandomBlock = Random.Range(1, 2); //BlocksObj.Length); 
-        Instantiate(BlocksObj[RandomBlock], SpownerPos.position, Quaternion.identity);
+        int RandomBlock = Random.Range(0, BlocksObj.Length); 
+        Instantiate(BlocksObj[RandomBlock], SpownerPos.position, BlocksObj[RandomBlock].transform.rotation);
     }
 }
