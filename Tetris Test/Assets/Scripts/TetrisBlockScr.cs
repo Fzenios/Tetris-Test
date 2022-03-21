@@ -5,65 +5,72 @@ using UnityEngine;
 public class TetrisBlockScr : MonoBehaviour
 {
     float CurrentTime;
-    [SerializeField] float FallTimeSlow, FallTimeFast;
     float FallTime;
-    public static int Height = 21;
-    public static int Width = 10;
+    int Height;
+    int Width;
     [SerializeField] Vector3 RotationPoint;
-    static Transform[,] grid = new Transform[Width,Height];
     void Start()
     {
         CurrentTime = 0;
-        FallTime = FallTimeSlow;
         GameOverCheck();
+        Height = SpownerScr.Height;
+        Width = SpownerScr.Width;
     }
 
     void Update()
-    {      
-        if(Input.GetKeyDown(KeyCode.A))
+    {
+        if (Input.GetKeyDown(KeyCode.A))
         {
             transform.position += new Vector3(-1, 0, 0);
-            if(!ValidMove())
+            if (!ValidMove())
                 transform.position -= new Vector3(-1, 0, 0);
-        }          
-        else if(Input.GetKeyDown(KeyCode.D))
-        {
-            transform.position += new Vector3(1, 0, 0);      
-            if(!ValidMove())
-                transform.position -= new Vector3(1, 0, 0);    
         }
-        else if(Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKeyDown(KeyCode.D))
         {
-            transform.RotateAround(transform.TransformPoint(RotationPoint), new Vector3(0, 0, 1), 90);
-            if(!ValidMove())
-                transform.RotateAround(transform.TransformPoint(RotationPoint), new Vector3(0, 0, 1), -90);           
-        }   
+            transform.position += new Vector3(1, 0, 0);
+            if (!ValidMove())
+                transform.position -= new Vector3(1, 0, 0);
+        }
+        else if (Input.GetKeyDown(KeyCode.W))
+        {
+            Rotate();
+        }
 
-        FallTime = Input.GetKey(KeyCode.S) ? FallTimeFast : FallTimeSlow;  
+        FallTime = Input.GetKey(KeyCode.S) ? DifficultyScr.FallTimeFast : DifficultyScr.FallTimeSlow;
 
-        if(CurrentTime > FallTime)
+        if (CurrentTime > FallTime)
+        {
+            transform.position += new Vector3(0, -1, 0);
+            CurrentTime = 0;
+            if (!ValidMove())
             {
-                transform.position += new Vector3(0, -1, 0);
-                CurrentTime = 0;
-                if(!ValidMove())
-                {
-                    transform.position -= new Vector3(0, -1, 0);
-                    AddToGrid();
-                    CheckForLine();
-                    enabled = false;
-                    FindObjectOfType<SpownerScr>().SpownBlock();                    
-                }
+                EndOfBrick();
             }
+        }
         else
-            CurrentTime += Time.deltaTime;      
+            CurrentTime += Time.deltaTime;
 
     }
-    
-    void CheckForLine()
+    protected virtual void Rotate()
     {
-        for (int i = Height-1; i >= 0; i--)
+        transform.RotateAround(transform.TransformPoint(RotationPoint), new Vector3(0, 0, 1), 90);
+        if (!ValidMove())
+            transform.RotateAround(transform.TransformPoint(RotationPoint), new Vector3(0, 0, 1), -90);
+    }
+    protected virtual void EndOfBrick()
+    {
+        transform.position -= new Vector3(0, -1, 0);
+        AddToGrid();
+        CheckForLine();
+        enabled = false;
+        FindObjectOfType<SpownerScr>().SpownBlock();
+    }
+
+    public void CheckForLine()
+    {
+        for (int i = Height - 1; i >= 0; i--)
         {
-            if(HasLine(i))
+            if (HasLine(i))
             {
                 DeleteLine(i);
                 RowDown(i);
@@ -74,19 +81,19 @@ public class TetrisBlockScr : MonoBehaviour
     {
         for (int j = 0; j < Width; j++)
         {
-            if(grid[j,i] == null )
+            if (SpownerScr.grid[j, i] == null)
             {
-                return false;                  
-            }                 
-        }        
-        return true;        
+                return false;
+            }
+        }
+        return true;
     }
     void DeleteLine(int i)
     {
         for (int j = 0; j < Width; j++)
         {
-            Destroy(grid[j, i].gameObject);
-            grid[j, i] = null;
+            Destroy(SpownerScr.grid[j, i].gameObject);
+            SpownerScr.grid[j, i] = null;
         }
     }
     void RowDown(int i)
@@ -95,23 +102,23 @@ public class TetrisBlockScr : MonoBehaviour
         {
             for (int j = 0; j < Width; j++)
             {
-                if(grid[j,y] != null)
+                if (SpownerScr.grid[j, y] != null)
                 {
-                    grid[j, y - 1] = grid[j, y];
-                    grid[j, y] = null;
-                    grid[j, y - 1].transform.position -= new Vector3(0 , 1, 0);
+                    SpownerScr.grid[j, y - 1] = SpownerScr.grid[j, y];
+                    SpownerScr.grid[j, y] = null;
+                    SpownerScr.grid[j, y - 1].transform.position -= new Vector3(0, 1, 0);
                 }
             }
         }
     }
-    void AddToGrid()
+    public void AddToGrid()
     {
         foreach (Transform children in transform)
         {
             int RoundedX = Mathf.RoundToInt(children.transform.position.x);
-            int RoundedY = Mathf.RoundToInt(children.transform.position.y);   
+            int RoundedY = Mathf.RoundToInt(children.transform.position.y);
 
-            grid[RoundedX, RoundedY] = children;             
+            SpownerScr.grid[RoundedX, RoundedY] = children;
         }
     }
 
@@ -120,15 +127,15 @@ public class TetrisBlockScr : MonoBehaviour
         foreach (Transform children in transform)
         {
             int RoundedX = Mathf.RoundToInt(children.transform.position.x);
-            int RoundedY = Mathf.RoundToInt(children.transform.position.y);  
+            int RoundedY = Mathf.RoundToInt(children.transform.position.y);
 
-            if(RoundedX < 0 || RoundedX >= Width || RoundedY < 0 || RoundedY >= Height)
+            if (RoundedX < 0 || RoundedX >= Width || RoundedY < 0 || RoundedY >= Height)
             {
                 return false;
             }
-            
-            
-            if(grid[RoundedX, RoundedY] != null)
+
+
+            if (SpownerScr.grid[RoundedX, RoundedY] != null)
                 return false;
         }
 
@@ -136,21 +143,14 @@ public class TetrisBlockScr : MonoBehaviour
     }
     void GameOverCheck()
     {
-        /*foreach (Transform children in transform)
-        {
-            int RoundedY = Mathf.RoundToInt(children.transform.position.y);  
-            if(RoundedY >= Height)
-            {
-                FindObjectOfType<GameoverScr>().Gameover();
-            }
-        }*/
         foreach (Transform children in transform)
         {
             int RoundedX = Mathf.RoundToInt(children.transform.position.x);
-            int RoundedY = Mathf.RoundToInt(children.transform.position.y);   
+            int RoundedY = Mathf.RoundToInt(children.transform.position.y);
 
-            if(grid[RoundedX, RoundedY] != null)
-                FindObjectOfType<GameoverScr>().Gameover();    
+            if (SpownerScr.grid[RoundedX, RoundedY] != null)
+                FindObjectOfType<GameoverScr>().Gameover();
         }
     }
+
 }
