@@ -8,7 +8,6 @@ public class SpownerScr : MonoBehaviour
     [SerializeField] Transform SpownerPos;
     [SerializeField] Transform BlockParent;
     CleanHierarchyScr cleanHierarchyScr;
-    DifficultyScr difficultyScr;
     public static int Height = 21;
     public static int Width = 10;
     int RandomBlock;

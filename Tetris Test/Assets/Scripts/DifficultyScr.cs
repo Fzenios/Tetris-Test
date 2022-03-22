@@ -17,7 +17,6 @@ public class DifficultyScr : MonoBehaviour
     void Update()
     {
         Timer += Time.deltaTime;
-        Debug.Log(Timer);
 
         if (Timer > 705)
             return;

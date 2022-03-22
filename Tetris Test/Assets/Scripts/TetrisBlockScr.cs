@@ -74,6 +74,7 @@ public class TetrisBlockScr : MonoBehaviour
             {
                 DeleteLine(i);
                 RowDown(i);
+                FindObjectOfType<ScoreCounterScr>().ScoreCount();
             }
         }
     }

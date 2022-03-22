@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanExplode: 0
+  ExplosionVer: {fileID: 1857851447193031514, guid: 1c949c7951c4c574eaec5b65dfc9fd8b, type: 3}
 --- !u!61 &2874594713267057405
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -250,7 +251,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e81bf38df561fd4e899994899ba3949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FallTimeSlow: 1
-  FallTimeFast: 0.1
   RotationPoint: {x: 0, y: 0, z: 0}
   bombDetonateVertScr: {fileID: 628206263117788966}
