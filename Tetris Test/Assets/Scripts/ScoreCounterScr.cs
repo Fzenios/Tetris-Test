@@ -14,6 +14,7 @@ public class ScoreCounterScr : MonoBehaviour
     {
         Score = 0;
         ScoreToAdd = 0;
+        ScoreTxt.text = "0";
     }
     public void ScoreCount()
     {
@@ -37,8 +38,7 @@ public class ScoreCounterScr : MonoBehaviour
                 case 0.1f: Score += ScoreCalculator(5); break;
                 default: Score += ScoreCalculator(5); break;
             }
-            Debug.Log("asd");
-            ScoreTxt.text = " " + Score;
+            ScoreTxt.text = Score.ToString();
             ScoreToAdd = 0;
         }
     }

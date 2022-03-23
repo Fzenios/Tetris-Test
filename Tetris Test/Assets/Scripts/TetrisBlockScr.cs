@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TetrisBlockScr : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class TetrisBlockScr : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        //Pc Build
+        /*if (Input.GetKeyDown(KeyCode.A))
         {
             transform.position += new Vector3(-1, 0, 0);
             if (!ValidMove())
@@ -30,13 +32,9 @@ public class TetrisBlockScr : MonoBehaviour
             transform.position += new Vector3(1, 0, 0);
             if (!ValidMove())
                 transform.position -= new Vector3(1, 0, 0);
-        }
-        else if (Input.GetKeyDown(KeyCode.W))
-        {
-            Rotate();
-        }
+        }*/
 
-        FallTime = Input.GetKey(KeyCode.S) ? DifficultyScr.FallTimeFast : DifficultyScr.FallTimeSlow;
+        FallTime = ControlsScr.DropBool ? DifficultyScr.FallTimeFast : DifficultyScr.FallTimeSlow;
 
         if (CurrentTime > FallTime)
         {
@@ -50,6 +48,23 @@ public class TetrisBlockScr : MonoBehaviour
         else
             CurrentTime += Time.deltaTime;
 
+    }
+    public void GoRight()
+    {
+        transform.position += new Vector3(1, 0, 0);
+        if (!ValidMove())
+            transform.position -= new Vector3(1, 0, 0);
+
+    }
+    public void GoLeft()
+    {
+        transform.position += new Vector3(-1, 0, 0);
+        if (!ValidMove())
+            transform.position -= new Vector3(-1, 0, 0);
+    }
+    public void RotateBtn()
+    {
+        Rotate();
     }
     protected virtual void Rotate()
     {

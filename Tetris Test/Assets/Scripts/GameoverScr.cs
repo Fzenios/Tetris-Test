@@ -6,15 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameoverScr : MonoBehaviour
 {
     [SerializeField] GameObject GameoverObj;
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
     public void Gameover()
     {
         GameoverObj.SetActive(true);
@@ -23,6 +14,6 @@ public class GameoverScr : MonoBehaviour
     public void Retry()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(1);
     }
 }

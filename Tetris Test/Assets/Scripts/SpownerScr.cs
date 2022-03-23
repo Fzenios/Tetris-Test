@@ -26,7 +26,8 @@ public class SpownerScr : MonoBehaviour
             RandomBlock = Random.Range(7, 9);
         else
             RandomBlock = Random.Range(0, 7);
-        Instantiate(BlocksObj[RandomBlock], SpownerPos.position, BlocksObj[RandomBlock].transform.rotation, BlockParent);
+        GameObject NewBlock = Instantiate(BlocksObj[RandomBlock], SpownerPos.position, BlocksObj[RandomBlock].transform.rotation, BlockParent);
+        ControlsScr.tetrisBlockScr = NewBlock.GetComponent<TetrisBlockScr>();
     }
     int BlockOrBomb()
     {
