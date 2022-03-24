@@ -21,7 +21,7 @@ public class TetrisBlockScr : MonoBehaviour
     void Update()
     {
         //Pc Build
-        /*if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             transform.position += new Vector3(-1, 0, 0);
             if (!ValidMove())
@@ -32,8 +32,8 @@ public class TetrisBlockScr : MonoBehaviour
             transform.position += new Vector3(1, 0, 0);
             if (!ValidMove())
                 transform.position -= new Vector3(1, 0, 0);
-        }*/
-
+        }
+        //
         FallTime = ControlsScr.DropBool ? DifficultyScr.FallTimeFast : DifficultyScr.FallTimeSlow;
 
         if (CurrentTime > FallTime)

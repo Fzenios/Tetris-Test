@@ -8,15 +8,15 @@ public class ScoreCounterScr : MonoBehaviour
 {
     [SerializeField] float Score;
     [SerializeField] TMP_Text ScoreTxt;
-    float ScoreToAdd;
-    bool IsCalculating;
+    protected float ScoreToAdd;
+    protected bool IsCalculating;
     void Start()
     {
         Score = 0;
         ScoreToAdd = 0;
         ScoreTxt.text = "0";
     }
-    public void ScoreCount()
+    public virtual void ScoreCount()
     {
         ScoreToAdd++;
         StartCoroutine(FinishTheFrame());

@@ -1859,6 +1859,7 @@ MonoBehaviour:
   - {fileID: 6876992503450796707, guid: fcb9dc2360fb12246895c28ca8ba8218, type: 3}
   SpownerPos: {fileID: 1264630353}
   BlockParent: {fileID: 958823337}
+  Background: {fileID: 265471933}
 --- !u!4 &988446420
 Transform:
   m_ObjectHideFlags: 0

@@ -7,19 +7,26 @@ public class SpownerScr : MonoBehaviour
     [SerializeField] GameObject[] BlocksObj;
     [SerializeField] Transform SpownerPos;
     [SerializeField] Transform BlockParent;
+    [SerializeField] Transform Background;
     CleanHierarchyScr cleanHierarchyScr;
-    public static int Height = 21;
-    public static int Width = 10;
+    public static int Height;
+    public static int Width;
     int RandomBlock;
 
-    public static Transform[,] grid = new Transform[Width, Height];
+    public static Transform[,] grid;
 
+    void Awake()
+    {
+        Height = (int)Background.localScale.y + 1;
+        Width = (int)Background.localScale.x;
+        grid = new Transform[Width, Height];
+    }
     void Start()
     {
         cleanHierarchyScr = gameObject.GetComponent<CleanHierarchyScr>();
         SpownBlock();
     }
-    public void SpownBlock()
+    public virtual void SpownBlock()
     {
         cleanHierarchyScr.CleanHierarchy();
         if (BlockOrBomb() == 2)
