@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnemyMechanic : MonoBehaviour
 {
     [SerializeField] Slider EnemySlider;
+    [SerializeField] TMP_Text ScoreTxt;
+    public int Score;
     [SerializeField] EnemySpownerScr enemySpownerScr;
     [SerializeField] DifficultyScr difficultyScr;
     float EnemyHealth;
+    void Start()
+    {
+        ScoreTxt.text = "0";
+    }
 
     public void SetUpEnemy(string Name)
     {
@@ -30,7 +37,11 @@ public class EnemyMechanic : MonoBehaviour
         EnemyHealth -= Damage;
         EnemySlider.value = EnemyHealth;
         if (EnemyHealth <= 0)
+        {
+            Score++;
+            ScoreTxt.text = Score.ToString();
             enemySpownerScr.EnemyDead();
+        }
     }
 
     float EnemyHpCalc()

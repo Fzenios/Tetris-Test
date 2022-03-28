@@ -6,7 +6,7 @@ using TMPro;
 
 public class ScoreCounterScr : MonoBehaviour
 {
-    [SerializeField] float Score;
+    public float Score;
     [SerializeField] TMP_Text ScoreTxt;
     protected float ScoreToAdd;
     protected bool IsCalculating;

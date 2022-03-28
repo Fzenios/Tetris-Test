@@ -30,7 +30,6 @@ public class DamageCalc : ScoreCounterScr
             }
             ScoreToAdd = 0;
             FindObjectOfType<EnemyMechanic>().EnemyDamaged(Damage);
-            Debug.Log(Damage);
             Damage = 0;
         }
     }

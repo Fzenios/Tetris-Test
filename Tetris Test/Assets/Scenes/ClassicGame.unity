@@ -1827,6 +1827,7 @@ GameObject:
   - component: {fileID: 988446423}
   - component: {fileID: 988446424}
   - component: {fileID: 988446425}
+  - component: {fileID: 988446428}
   - component: {fileID: 988446427}
   m_Layer: 0
   m_Name: Public Scripts
@@ -1887,6 +1888,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameoverObj: {fileID: 2045648009}
+  BlocksObjs: {fileID: 958823337}
+  highScoresObject: {fileID: 11400000, guid: 4f7be170f82b74242808e16a47b4f486, type: 2}
 --- !u!114 &988446422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2053,6 +2056,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &988446428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988446418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a37d6ca2022b992408be639a7dfd22c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highScoresObject: {fileID: 11400000, guid: 4f7be170f82b74242808e16a47b4f486, type: 2}
 --- !u!1 &1035171374
 GameObject:
   m_ObjectHideFlags: 0

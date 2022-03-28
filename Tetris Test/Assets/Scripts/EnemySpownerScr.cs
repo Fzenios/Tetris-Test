@@ -11,7 +11,10 @@ public class EnemySpownerScr : MonoBehaviour
 
     void Start()
     {
-        SpownEnemy();
+        int RandomX = Random.Range(1, 9);
+        int RandomEnemy = Random.Range(0, EnemyObj.Length);
+        SpownedEnemy = Instantiate(EnemyObj[RandomEnemy], new Vector2(RandomX, 18), Quaternion.identity, EnemiesParent);
+        enemyMechanic.SetUpEnemy(EnemyObj[RandomEnemy].name);
     }
 
     public void EnemyDead()
@@ -21,9 +24,15 @@ public class EnemySpownerScr : MonoBehaviour
     }
     public void SpownEnemy()
     {
-        int RandomX = Random.Range(1, 9);
-        int RandomEnemy = Random.Range(0, EnemyObj.Length);
-        SpownedEnemy = Instantiate(EnemyObj[RandomEnemy], new Vector2(RandomX, 18), Quaternion.identity, EnemiesParent);
-        enemyMechanic.SetUpEnemy(EnemyObj[RandomEnemy].name);
+        StartCoroutine(SpownEnemyDelayed());
+        IEnumerator SpownEnemyDelayed()
+        {
+            yield return new WaitForSeconds(1);
+            int RandomX = Random.Range(1, 9);
+            int RandomEnemy = Random.Range(0, EnemyObj.Length);
+            SpownedEnemy = Instantiate(EnemyObj[RandomEnemy], new Vector2(RandomX, 18), Quaternion.identity, EnemiesParent);
+            enemyMechanic.SetUpEnemy(EnemyObj[RandomEnemy].name);
+        }
     }
+
 }

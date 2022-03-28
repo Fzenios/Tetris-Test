@@ -706,7 +706,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 988446421}
         m_TargetAssemblyTypeName: GameoverScr, Assembly-CSharp
-        m_MethodName: Retry
+        m_MethodName: RetryHyperCasual
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1709,6 +1709,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemySlider: {fileID: 2075869916}
+  ScoreTxt: {fileID: 1552219913}
+  Score: 0
   enemySpownerScr: {fileID: 881501691}
   difficultyScr: {fileID: 988446423}
 --- !u!114 &881501691
@@ -2007,6 +2009,7 @@ GameObject:
   - component: {fileID: 988446423}
   - component: {fileID: 988446428}
   - component: {fileID: 988446425}
+  - component: {fileID: 988446424}
   - component: {fileID: 988446427}
   m_Layer: 0
   m_Name: Public Scripts
@@ -2067,6 +2070,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameoverObj: {fileID: 2045648009}
+  BlocksObjs: {fileID: 958823337}
+  highScoresObject: {fileID: 11400000, guid: 4f7be170f82b74242808e16a47b4f486, type: 2}
 --- !u!114 &988446422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2098,6 +2103,19 @@ MonoBehaviour:
   lvl4: 0.3
   lvl5: 0.2
   lvl6: 0.1
+--- !u!114 &988446424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988446418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a37d6ca2022b992408be639a7dfd22c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highScoresObject: {fileID: 11400000, guid: 4f7be170f82b74242808e16a47b4f486, type: 2}
 --- !u!114 &988446425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2711,7 +2729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1552219913
 MonoBehaviour:
   m_ObjectHideFlags: 0
