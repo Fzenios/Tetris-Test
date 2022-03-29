@@ -6,6 +6,28 @@ public class ControlsScr : MonoBehaviour
 {
     public static TetrisBlockScr tetrisBlockScr;
     public static bool DropBool;
+    [SerializeField] GameObject PCControls, MobileControls;
+    void Start()
+    {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+        {
+            PCControls.SetActive(true);
+            MobileControls.SetActive(false);
+        }
+#elif UNITY_ANDROID || UNITY_IOS
+{
+            PCControls.SetActive(false);
+            MobileControls.SetActive(true);
+        }
+#else
+{
+            PCControls.SetActive(true);
+            MobileControls.SetActive(false);
+        }
+
+#endif
+
+    }
     public void RotateClick()
     {
         tetrisBlockScr.RotateBtn();

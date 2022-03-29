@@ -19,19 +19,23 @@ public class TetrisBlockScr : MonoBehaviour
 
     void Update()
     {
-        //Pc Build
-        if (Input.GetKeyDown(KeyCode.A))
+        //Pc Controller
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            transform.position += new Vector3(-1, 0, 0);
-            if (!ValidMove())
-                transform.position -= new Vector3(-1, 0, 0);
+            GoLeft();
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            transform.position += new Vector3(1, 0, 0);
-            if (!ValidMove())
-                transform.position -= new Vector3(1, 0, 0);
+            GoRight();
         }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Rotate();
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+            ControlsScr.DropBool = true;
+        else if (Input.GetKeyUp(KeyCode.DownArrow))
+            ControlsScr.DropBool = false;
         //
         FallTime = ControlsScr.DropBool ? DifficultyScr.FallTimeFast : DifficultyScr.FallTimeSlow;
 
@@ -46,7 +50,6 @@ public class TetrisBlockScr : MonoBehaviour
         }
         else
             CurrentTime += Time.deltaTime;
-
     }
     public void GoRight()
     {
@@ -89,6 +92,7 @@ public class TetrisBlockScr : MonoBehaviour
                 DeleteLine(i);
                 RowDown(i);
                 FindObjectOfType<ScoreCounterScr>().ScoreCount();
+                FindObjectOfType<SoundsScr>().RowClip();
             }
         }
     }
